@@ -39,12 +39,8 @@ team_colors = {
     'WSN': '#AB0003'
 }
 df_relievers['Last Name'] = df_relievers['Name'].str.split(' ').str[-1]
-# 1. Filter for the top 30 relievers by WPA
-# The .sort_values() method is used to sort the DataFrame.
-# The .head(30) method then selects the first 30 rows of the sorted DataFrame.
 df_top_30_wpa = df_relievers.sort_values(by='WPA', ascending=False).head(30)
 
-# Calculate average WPA and pLI
 avg_wpa = df_top_30_wpa['WPA'].mean()
 avg_pli = df_top_30_wpa['pLI'].mean()
 
@@ -55,7 +51,6 @@ for index, row in df_top_30_wpa.iterrows():
     ax.scatter(row['pLI'], row['WPA'], color=color, s=50)
     ax.text(row['pLI'], row['WPA'], f" {row['Last Name']}", fontsize=8, ha='left', va='center', color=color)
 
-# Add quadrant lines and labels
 ax.axvline(avg_pli, color='black', linestyle='--', lw=1)
 ax.axhline(avg_wpa, color='black', linestyle='--', lw=1)
 
